@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: catalog
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalog
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+
+server:
+  port: 8081
