@@ -54,7 +54,8 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     @Transactional
     public InventoryDTO reserveStock(UUID bookId, int quantity) {
-        Inventory inventory = findByBookIdOrThrow(bookId);
+         Inventory inventory = inventoryRepository.findByBookIdWithLock(bookId).orElseThrow(() -> new EntityNotFoundException(
+                String.format("Inventory for bookId %s not found", bookId)));
 
         int available = inventory.getQuantity() - inventory.getReservedQuantity();
         if (available < quantity) {
